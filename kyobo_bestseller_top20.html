@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<title>교보문고 베스트셀러 TOP 20</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background: #f7f5f0;
+    color: #2c2c2c;
+    line-height: 1.5;
+  }
+  header {
+    background: linear-gradient(135deg, #8B4513 0%, #5d2f0a 100%);
+    color: #fff;
+    padding: 60px 20px 50px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  header h1 { font-size: 2.4rem; margin-bottom: 10px; letter-spacing: -1px; }
+  header .subtitle { font-size: 1rem; opacity: 0.9; }
+  header .meta { font-size: 0.85rem; opacity: 0.75; margin-top: 8px; }
+  main { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .book {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .book:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+  .rank {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #8B4513;
+    color: #fff;
+    font-weight: 700;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    z-index: 2;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+  .rank.top3 { background: #d4af37; color: #fff; }
+  .cover-wrap {
+    background: #f0ece4;
+    padding: 24px 20px 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 240px;
+  }
+  .cover-wrap img {
+    max-width: 100%;
+    max-height: 220px;
+    width: auto;
+    height: auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+    object-fit: contain;
+    background: #ddd;
+  }
+  .info { padding: 18px 18px 20px; flex-grow: 1; display: flex; flex-direction: column; }
+  .title { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; line-height: 1.35; }
+  .title a { color: #2c2c2c; text-decoration: none; }
+  .title a:hover { color: #8B4513; }
+  .author { font-size: 0.9rem; color: #555; margin-bottom: 4px; }
+  .publisher { font-size: 0.82rem; color: #888; margin-bottom: 12px; }
+  .price-box { margin-top: auto; padding-top: 12px; border-top: 1px solid #eee; }
+  .sale-price { font-size: 1.15rem; font-weight: 700; color: #c0392b; }
+  .discount { font-size: 0.85rem; color: #c0392b; margin-right: 6px; font-weight: 600; }
+  .original { font-size: 0.85rem; color: #aaa; text-decoration: line-through; margin-left: 8px; }
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: #888;
+    font-size: 0.85rem;
+    border-top: 1px solid #e5e0d6;
+    margin-top: 40px;
+  }
+  footer a { color: #8B4513; text-decoration: none; }
+  @media (max-width: 768px) {
+    header { padding: 40px 16px 32px; }
+    header h1 { font-size: 1.5rem; }
+    header .subtitle { font-size: 0.85rem; }
+    header .meta { font-size: 0.75rem; }
+    main { padding: 20px 10px; }
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .cover-wrap { min-height: 170px; padding: 14px 8px 10px; }
+    .cover-wrap img { max-height: 150px; }
+    .info { padding: 10px 10px 14px; }
+    .title { font-size: 0.9rem; margin-bottom: 6px; line-height: 1.3; }
+    .author { font-size: 0.78rem; }
+    .publisher { font-size: 0.72rem; margin-bottom: 8px; }
+    .sale-price { font-size: 0.95rem; }
+    .discount, .original { font-size: 0.72rem; }
+    .original { display: block; margin-left: 0; margin-top: 2px; }
+    .rank { width: 28px; height: 28px; font-size: 0.8rem; top: 6px; left: 6px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>교보문고 베스트셀러 TOP 20</h1>
+  <p class="subtitle">종합 주간 베스트 (2026.04.22 ~ 2026.04.28)</p>
+  <p class="meta">기준일: 2026년 5월 1일</p>
+</header>
+
+<main>
+  <div class="grid">
+
+    <article class="book">
+      <span class="rank top3">1</span>
+      <div class="cover-wrap">
+        <img src="https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9788925588735.jpg" alt="프로젝트 헤일메리" loading="lazy" referrerpolicy="no-referrer">
+      </div>
+      <div class="info">
+        <h2 class="title"><a href="https://product.kyobobook.co.kr/detail/S000000479333" target="_blank" rel="noreferrer">프로젝트 헤일메리</a></h2>
+        <p class="author">앤디 위어</p>
+        <p class="publisher">알에이치코리아 · 2026.02.19</p>
+        <div class="price-box">
+          <span class="discount">10%</span><span class="sale-price">19,800원</span><span class="original">22,000원</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="book">
+      <span class="rank top3">2</span>
+      <div class="cover-wrap">
+        <img src="https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791141602376.jpg" alt="안녕이라 그랬어" loading="lazy" referrerpolicy="no-referrer">
+      </div>
+      <div class="info">
+        <h2 class="title"><a href="https://product.kyobobook.co.kr/detail/S000216796615" target="_blank" rel="noreferrer">안녕이라 그랬어</a></h2>
+        <p class="author">김애란</p>
+        <p class="publisher">문학동네 · 2025.06.20</p>
+        <div class="price-box">
+          <span class="discount">10%</span><span class="sale-price">15,120원</span><span class="original">16,800원</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="book">
+      <span class="rank top3">3</span>
+      <div class="cover-wrap">
+        <img src="https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791198754097.jpg" alt="다크 심리학 2" loading="lazy" referrerpolicy="no-referrer">
+      </div>
+      <div class="info">
+        <h2 class="title"><a href="https://product.kyobobook.co.kr/detail/S000219545519" target="_blank" rel="noreferrer">다크 심리학 2</a></h2>
+        <p class="author">다크 사이드 프로젝트</p>
+        <p class="publisher">어센딩 · 2026.04.24</p>
+        <div class="price-box">
+          <span class="discount">10%</span><span class="sale-price">21,780원</span><span class="original">24,200원</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="book">
+      <span class="rank">4</span>
+      <div class="cover-wrap">
+        <img src="https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791141603250.jpg" alt="제17회 젊은작가상 수상작품집(2026)" loading="lazy" referrerpolicy="no-referrer">
+      </div>
+      <div class="info">
+        <h2 class="title"><a href="https://product.kyobobook.co.kr/detail/S000219615731" target="_blank" rel="noreferrer">제17회 젊은작가상 수상작품집(2026)</a></h2>
+        <p class="author">김채원 외</p>
+        <p class="publisher">문학동네 · 2026.03.31</p>
+        <div class="price-box">
+          <span class="discount">10%</span><span class="sale-price">6,930원</span><span class="original">7,700원</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="book">
+      <span class="rank">5</span>
+      <div class="cover-wrap">
+        <img src="https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791124248171.jpg" alt="인생을 위한 최소한의 생각" loading="lazy" referrerpolicy="no-referrer">
+      </div>
+      <div class="info">
+        <h2 class="title"><a href="https://product.kyobobook.co.kr/detail/S000219182450" target="_blank" rel="noreferrer">인생을 위한 최소한의 생각</a></h2>
+        <p class="author">신영준 외</p>
+        <p class="publisher">상상스퀘어 · 2026.02.25</p>
+        <div class="price-box">
+          <span class="discount">10%</span><span class="sale-price">17,820원</span><span class="original">19,800원</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="book">
+      <span class="rank">6</span>
+      <div class="cover-wrap">
+        <img src="https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791194530701.jpg" alt="괴테는 모든 것을 말했다" loading="lazy" referrerpolicy="no-referrer">
+      </div>
+      <div class="info">
+        <h2 class="title"><a href="https://product.kyobobook.co.kr/detail/S000218438100" target="_blank" rel="noreferrer">괴테는 모든 것을 말했다</a></h2>
+        <p class="author">스즈키 유이</p>
+        <p class="publisher">리프 · 2025.11.18</p>
+        <div class="price-box">
+          <span class="discount">10%</span><span class="sale-price">15,300원</span><span class="original">17,000원</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="book">
+      <span class="rank">7</span>
+      <div class="cover-wrap">
+        <img src="https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791199305304.jpg" alt="자몽살구클럽" loading="lazy" referrerpolicy="no-referrer">
+      </div>
+      <div class="info">
+        <h2 class="title"><a href="https://product.kyobobook.co.kr/detail/S000217089705" target="_blank" rel="noreferrer">자몽살구클럽</a></h2>
+        <p class="author">한로로</p>
+        <p class="publisher">어센틱 · 2025.07.25</p>
+        <div class="price-box">
+          <span class="discount">10%</span><span class="sale-price">10,800원</span><span class="original">12,000원</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="book">
+      <span class="rank">8</span>
+      <div class="cover-wrap">
+        <img src="https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791199489530.jpg" alt="무례한 세상에서 나를 지키는 법" loading="lazy" referrerpolicy="no-referrer">
+      </div>
+      <div class="info">
+        <h2 class="title"><a href="https://product.kyobobook.co.kr/detail/S000219450826" target="_blank" rel="noreferrer">무례한 세상에서 나를 지키는 법</a></h2>
+        <p class="author">발타자르 그라시안</p>
+        <p class="publisher">논픽션 · 2026.03.13</p>
+        <div class="price-box">
+          <span class="discount">10%</span><span class="sale-price">17,820원</span><span class="original">19,800원</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="book">
+      <span class="rank">9</span>
+      <div class="cover-wrap">
+        <img src="https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791199496651.jpg" alt="부처님 말씀대로 살아보니" loading="lazy" referrerpolicy="no-referrer">
+      </div>
+      <div class="info">
+        <h2 class="title"><a href="https://product.kyobobook.co.kr/detail/S000219145799" target="_blank" rel="noreferrer">부처님 말씀대로 살아보니</a></h2>
+        <p class="author">토니 페르난도</p>
+        <p class="publisher">윌마 · 2026.02.20</p>
+        <div class="price-box">
+          <span class="discount">10%</span><span class="sale-price">17,010원</span><span class="original">18,900원</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="book">
+      <span class="rank">10</span>
+      <div class="cover-wrap">
+        <img src="https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791199383074.jpg" alt="완벽한 원시인" loading="lazy" referrerpolicy="no-referrer">
+      </div>
+      <div class="info">
+        <h2 class="title"><a href="https://product.kyobobook.co.kr/detail/S000219310977" target="_blank" rel="noreferrer">완벽한 원시인</a></h2>
+        <p class="author">자청</p>
+        <p class="publisher">필로틱 · 2026.03.11</p>
+        <div class="price-box">
+          <span class="discount">10%</span><span class="sale-price">19,800원</span><span class="original">22,000원</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="book">
+      <span class="rank">11</span>
+      <div class="cover-wrap">
+        <img src="https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9788998441012.jpg" alt="모순" loading="lazy" referrerpolicy="no-referrer">
+      </div>
+      <div class="info">
+        <h2 class="title"><a href="https://product.kyobobook.co.kr/detail/S000001632467" target="_blank" rel="noreferrer">모순</a></h2>
+        <p class="author">양귀자</p>
+        <p class="publisher">쓰다 · 2013.04.01</p>
+        <div class="price-box">
+          <span class="discount">10%</span><span class="sale-price">11,700원</span><span class="original">13,000원</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="book">
+      <span class="rank">12</span>
+      <div class="cover-wrap">
+        <img src="https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791192559100.jpg" alt="니체의 초월자" loading="lazy" referrerpolicy="no-referrer">
+      </div>
+      <div class="info">
+        <h2 class="title"><a href="https://product.kyobobook.co.kr/detail/S000218278239" target="_blank" rel="noreferrer">니체의 초월자</a></h2>
+        <p class="author">프리드리히 니체</p>
+        <p class="publisher">히읏 · 2025.10.28</p>
+        <div class="price-box">
+          <span class="discount">10%</span><span class="sale-price">15,210원</span><span class="original">16,900원</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="book">
+      <span class="rank">13</span>
+      <div class="cover-wrap">
+        <img src="https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9788937460586.jpg" alt="싯다르타" loading="lazy" referrerpolicy="no-referrer">
+      </div>
+      <div class="info">
+        <h2 class="title"><a href="https://product.kyobobook.co.kr/detail/S000000620195" target="_blank" rel="noreferrer">싯다르타</a></h2>
+        <p class="author">헤르만 헤세</p>
+        <p class="publisher">민음사 · 2002.01.20</p>
+        <div class="price-box">
+          <span class="discount">10%</span><span class="sale-price">7,200원</span><span class="original">8,000원</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="book">
+      <span class="rank">14</span>
+      <div class="cover-wrap">
+        <img src="https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791124038192.jpg" alt="나의 완벽한 장례식" loading="lazy" referrerpolicy="no-referrer">
+      </div>
+      <div class="info">
+        <h2 class="title"><a href="https://product.kyobobook.co.kr/detail/S000218969272" target="_blank" rel="noreferrer">나의 완벽한 장례식</a></h2>
+        <p class="author">조현선</p>
+        <p class="publisher">북로망스 · 2026.01.21</p>
+        <div class="price-box">
+          <span class="discount">10%</span><span class="sale-price">17,100원</span><span class="original">19,000원</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="book">
+      <span class="rank">15</span>
+      <div class="cover-wrap">
+        <img src="https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791167376442.jpg" alt="여러 개의 북을 두드리며" loading="lazy" referrerpolicy="no-referrer">
+      </div>
+      <div class="info">
+        <h2 class="title"><a href="https://product.kyobobook.co.kr/detail/S000219568692" target="_blank" rel="noreferrer">여러 개의 북을 두드리며</a></h2>
+        <p class="author">올가 토카르추크</p>
+        <p class="publisher">은행나무 · 2026.04.30</p>
+        <div class="price-box">
+          <span class="discount">10%</span><span class="sale-price">17,820원</span><span class="original">19,800원</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="book">
+      <span class="rank">16</span>
+      <div class="cover-wrap">
+        <img src="https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791140718481.jpg" alt="연금 투자 무작정 따라하기" loading="lazy" referrerpolicy="no-referrer">
+      </div>
+      <div class="info">
+        <h2 class="title"><a href="https://product.kyobobook.co.kr/detail/S000219570530" target="_blank" rel="noreferrer">연금 투자 무작정 따라하기</a></h2>
+        <p class="author">김성일</p>
+        <p class="publisher">길벗 · 2026.05.06</p>
+        <div class="price-box">
+          <span class="discount">10%</span><span class="sale-price">21,600원</span><span class="original">24,000원</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="book">
+      <span class="rank">17</span>
+      <div class="cover-wrap">
+        <img src="https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791124370421.jpg" alt="나는 부동산에 가지 않고 SNS로 분양권을 산다" loading="lazy" referrerpolicy="no-referrer">
+      </div>
+      <div class="info">
+        <h2 class="title"><a href="https://product.kyobobook.co.kr/detail/S000219786380" target="_blank" rel="noreferrer">나는 부동산에 가지 않고 SNS로 분양권을 산다</a></h2>
+        <p class="author">베리스</p>
+        <p class="publisher">모티브 · 2026.04.29</p>
+        <div class="price-box">
+          <span class="discount">10%</span><span class="sale-price">19,800원</span><span class="original">22,000원</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="book">
+      <span class="rank">18</span>
+      <div class="cover-wrap">
+        <img src="https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791198939777.jpg" alt="늙지 않고 아프지 않는 지혜" loading="lazy" referrerpolicy="no-referrer">
+      </div>
+      <div class="info">
+        <h2 class="title"><a href="https://product.kyobobook.co.kr/detail/S000219238176" target="_blank" rel="noreferrer">늙지 않고 아프지 않는 지혜</a></h2>
+        <p class="author">라정찬</p>
+        <p class="publisher">끌리는책 · 2026.02.14</p>
+        <div class="price-box">
+          <span class="discount">10%</span><span class="sale-price">15,300원</span><span class="original">17,000원</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="book">
+      <span class="rank">19</span>
+      <div class="cover-wrap">
+        <img src="https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9788925588711.jpg" alt="아르테미스(스폐셜 에디션)" loading="lazy" referrerpolicy="no-referrer">
+      </div>
+      <div class="info">
+        <h2 class="title"><a href="https://product.kyobobook.co.kr/detail/S000000479331" target="_blank" rel="noreferrer">아르테미스(스폐셜 에디션)</a></h2>
+        <p class="author">앤디 위어</p>
+        <p class="publisher">알에이치코리아 · 2021.05.04</p>
+        <div class="price-box">
+          <span class="discount">10%</span><span class="sale-price">17,820원</span><span class="original">19,800원</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="book">
+      <span class="rank">20</span>
+      <div class="cover-wrap">
+        <img src="https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791175487598.jpg" alt="에그박사 18" loading="lazy" referrerpolicy="no-referrer">
+      </div>
+      <div class="info">
+        <h2 class="title"><a href="https://product.kyobobook.co.kr/detail/S000219732317" target="_blank" rel="noreferrer">에그박사 18</a></h2>
+        <p class="author">에그박사</p>
+        <p class="publisher">미래엔아이세움 · 2026.04.22</p>
+        <div class="price-box">
+          <span class="discount">10%</span><span class="sale-price">15,120원</span><span class="original">16,800원</span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</main>
+
+<footer>
+  <p>출처: <a href="https://store.kyobobook.co.kr/bestseller/total/weekly" target="_blank" rel="noreferrer">교보문고 종합 베스트셀러</a></p>
+  <p>본 페이지는 정보 제공 목적으로 작성되었습니다.</p>
+</footer>
+
+</body>
+</html>
